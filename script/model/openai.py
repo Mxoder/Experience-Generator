@@ -13,7 +13,6 @@ class OpenaiModel(BaseModel):
         self.generation_config = {
             "temperature": 0.7,
             "top_p": 0.85,
-            "top_k": 40
         }
 
     def set_system_prompt(self, system_prompt: str):
