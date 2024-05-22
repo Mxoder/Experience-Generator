@@ -25,7 +25,7 @@
 
 ### Step 1：确定模型
 
-#### 百度 Ernie（文心一言）
+#### 1. 百度 Ernie（文心一言）
 
 百度的 ernie 两个轻量级模型宣布免费啦，直接狠狠调用（测试了一下，并发能到 50，RPM ≤ 100）。
 
@@ -37,19 +37,19 @@
 
 
 
-#### OpenAI 格式
+#### 2. OpenAI 格式
 
-##### OpenAI 原生
+##### 2.1 OpenAI 原生
 
 按照[官网教程](https://platform.openai.com/docs/quickstart)，在 `config/config.json` 的 `openai` 字段填入 `api_key` 即可，注意 `chosen_model` 为 `openai`，且需要**网络畅通**。
 
-##### 中转代理站 / 兼容 OpenAI 的网站
+##### 2.2 中转代理站 / 兼容 OpenAI 的网站
 
 代理站一般都有教程，api_key 和原生一样填入，主要需要在 `config/config.json` 的 `openai` 字段修改 `base_url`，即改为代理站提供的 `base_url`。
 
 兼容 OpenAI 的网站也很多，包括[通义千问](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/)、[Together.ai]([OpenAI compatibility (together.ai)](https://docs.together.ai/docs/openai-api-compatibility)) 等。同样修改 `base_url` 和 `api_key` 即可。
 
-##### Ollama / 本地 OpenAI 格式部署
+##### 2.3 Ollama / 本地 OpenAI 格式部署
 
 类似于 Ollama 本地部署模型，只要兼容 OpenAI 格式，均可以通过修改 `base_url` 和 `api_key` 的方式调用，例如 Ollama：[OpenAI compatibility · Ollama Blog](https://ollama.com/blog/openai-compatibility)。
 
