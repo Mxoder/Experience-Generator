@@ -47,7 +47,7 @@
 
 代理站一般都有教程，api_key 和原生一样填入，主要需要在 `config/config.json` 的 `openai` 字段修改 `base_url`，即改为代理站提供的 `base_url`。
 
-兼容 OpenAI 的网站也很多，包括[通义千问](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/)、[Together.ai]([OpenAI compatibility (together.ai)](https://docs.together.ai/docs/openai-api-compatibility)) 等。同样修改 `base_url` 和 `api_key` 即可。
+兼容 OpenAI 的网站也很多，包括[通义千问](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/)、[Together.ai](https://docs.together.ai/docs/openai-api-compatibility) 等。同样修改 `base_url` 和 `api_key` 即可。
 
 ##### 2.3 Ollama / 本地 OpenAI 格式部署
 
