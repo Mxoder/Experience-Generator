@@ -1,0 +1,20 @@
+{
+    "base_info": {
+        "stu_name": "航小专",
+        "stu_id": 12345678,
+        "stu_phone": 18812345678,
+        "stu_class": 6,
+        "stu_supervisor": "航大专"
+    },
+    "chosen_model": "ernie",
+    "ernie": {
+        "api_key": "xxxxxxxxxxxxxxxxx",
+        "secret_key": "xxxxxxxxxxxxxxxxxxxxxx",
+        "model": "ernie-speed-128k"
+    },
+    "openai": {
+        "api_key": "sk-xxxxxxxxxxxxxxxxxxxxxxxx",
+        "base_url": "https://api.openai.com/v1/chat/completions",
+        "model": "gpt-3.5-turbo"
+    }
+}
