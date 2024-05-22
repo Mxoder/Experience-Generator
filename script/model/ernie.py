@@ -6,6 +6,13 @@ from loguru import logger
 
 class ErnieModel(BaseModel):
     def __init__(self, api_key: str, secret_key: str, model: str):
+        """
+        Initializes the ERNIE model with necessary credentials and default settings.
+
+        :param api_key: The API key for accessing the ERNIE service.
+        :param secret_key: The secret key associated with the API key.
+        :param model: The name or identifier of the ERNIE model to use.
+        """
         super().__init__()
         self.api_key = api_key
         self.secret_key = secret_key
@@ -16,13 +23,34 @@ class ErnieModel(BaseModel):
         self.top_p = 0.8
 
     def set_system_prompt(self, system_prompt: str):
+        """
+        Sets the system-level prompt that influences the model's behavior across all generations.
+
+        :param system_prompt: The system-level prompt string.
+        """
         self.system_prompt = system_prompt
 
-    def set_generation_config(self, temperature: Optional[float] = 0.9, top_p: Optional[float] = 0.8):
+    def set_generation_config(
+        self,
+        temperature: Optional[float] = 0.9,
+        top_p: Optional[float] = 0.8
+    ):
+        """
+        Adjusts the generation parameters controlling output randomness and diversity.
+
+        :param temperature: Float value controlling randomness; defaults to 0.9.
+        :param top_p: Float value for nucleus sampling; defaults to 0.8.
+        """
         self.temperature = temperature
         self.top_p = top_p
 
     def base_generate(self, input_content: str) -> Optional[str]:
+        """
+        Core method to send a request to the ERNIE model and receive generated text.
+
+        :param input_content: The content to be processed by the model.
+        :return: Generated text from the model or None on failure.
+        """
         base_url = f"https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/{self.model_name}"
         url = f"{base_url}?access_token={self.access_token}"
         payload = json.dumps({
@@ -88,6 +116,11 @@ class ErnieModel(BaseModel):
         return self.base_generate(input_content)
     
     def _get_access_token(self) -> Optional[str]:
+        """
+        Retrieves an access token required for authenticated API calls to the ERNIE service.
+
+        :return: Access token string on success, None on failure.
+        """
         url = f"https://aip.baidubce.com/oauth/2.0/token"
         params = {
             'grant_type': 'client_credentials',
