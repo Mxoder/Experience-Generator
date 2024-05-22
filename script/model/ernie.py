@@ -18,7 +18,7 @@ class ErnieModel(BaseModel):
         self.secret_key = secret_key
         self.model_name = model
         self.access_token = self._get_access_token()
-        self.system_prompt = ""
+        self.system_prompt = None
         self.temperature = 0.9
         self.top_p = 0.8
 
@@ -72,48 +72,6 @@ class ErnieModel(BaseModel):
         except requests.RequestException as e:
             logger.error(f"Request failed: {e}")
             return None
-    
-    def generate_text(self, ref_text: str) -> Optional[str]:
-        input_content = self.generator_prompt
-        input_content = input_content.replace(r'{{ref_text}}', ref_text)
-        return self.base_generate(input_content)
-    
-    def paraphrase_text(self, raw_text: str) -> Optional[str]:
-        split_text = [text for text in raw_text.split('\n') if len(text.strip()) > 1]
-        if len(split_text[0]) <= 40:
-            split_text = split_text[1:]
-        new_raw_text = '\n\n'.join(split_text)
-        new_text = []
-        i = 1
-        accumulated_text = []
-        for text in split_text:
-            if len(text) < 40:  # maybe the title
-                # new_text.append(text)
-                continue
-            accumulated_text.append(text)
-            if i % 3 == 0:
-                input_content = self.paraphraser_prompt
-                input_content = input_content.replace(r'{{raw_text}}', new_raw_text)
-                input_content = input_content.replace(r'{{text_to_paraphrase}}', '\n'.join(accumulated_text))
-                paraphrased_text = self.base_generate(input_content)
-                new_text.append(paraphrased_text)
-                accumulated_text = []
-            i += 1
-        if accumulated_text:
-            new_text.extend(accumulated_text)
-        return '\n'.join(new_text)
-    
-    def compress_text(self, ref_text: str, raw_text: str) -> Optional[str]:
-        input_content = self.compressor_prompt
-        input_content = input_content.replace(r'{{ref_text}}', ref_text)
-        input_content = input_content.replace(r'{{raw_text}}', raw_text)
-        return self.base_generate(input_content)
-    
-    def make_title(self, ref_text: str, raw_text: str) -> Optional[str]:
-        input_content = self.title_maker_prompt
-        input_content = input_content.replace(r'{{ref_text}}', ref_text)
-        input_content = input_content.replace(r'{{raw_text}}', raw_text)
-        return self.base_generate(input_content)
     
     def _get_access_token(self) -> Optional[str]:
         """
